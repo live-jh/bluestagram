@@ -4,3 +4,4 @@ __pycache__
 .DS_STORE
 db.sqlite3
 config/common/env.json
+venv/*
