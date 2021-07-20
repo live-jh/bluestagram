@@ -1,7 +1,18 @@
 import React from "react";
+import {Route} from "react-router-dom";
+import AppLayout from "components/layouts/AppLayout";
+import About from "./About";
+import Home from "./Home";
+import AccountRoutes from "./account";
 
 const Root = (props) => {
-    return <div>최상위 컴포넌트</div>;
+    return (
+        <AppLayout>
+            <Route exact path="/" component={Home}/>
+            <Route path="/about" component={About}/>
+            <Route path="/account" component={AccountRoutes}/>
+        </AppLayout>
+    )
 }
 
 export default Root;
