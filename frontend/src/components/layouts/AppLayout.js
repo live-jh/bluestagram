@@ -9,8 +9,8 @@ const AppLayout = ({children}) => {
         <>
             <div className="app">
                 <AppHeader/>
-                <SideBar/>
                 <div className="contents">{children}</div>
+                <SideBar/>
                 <AppFooter/>
             </div>
         </>

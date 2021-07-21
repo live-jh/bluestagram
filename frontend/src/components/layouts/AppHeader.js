@@ -1,11 +1,20 @@
 import React from "react";
-import {Input} from "antd";
+import {Input, Menu} from "antd";
 
 const AppHeader = (props) => {
     return (
         <div className="app-header">
-            <h1>BlueStagram</h1>
-            <Input.Search placeholder={"Header Input"}/>
+            <h1 className="page-title">BlueStagram</h1>
+            <div className="search">
+                <Input.Search placeholder={"Header Input"}/>
+            </div>
+            <div className="topnav">
+              <Menu mode="horizontal">
+                  <Menu.Item>Menu 1</Menu.Item>
+                  <Menu.Item>Menu 2</Menu.Item>
+                  <Menu.Item>Menu 3</Menu.Item>
+              </Menu>
+            </div>
         </div>
     );
 }
