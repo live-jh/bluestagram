@@ -1,5 +1,5 @@
 import React from "react";
-import StoryList from "../StoryList";
+import StoryList from "../story/StoryList";
 import SuggestionList from "../suggestion/SuggestionList";
 
 const SideBar = (props) => {

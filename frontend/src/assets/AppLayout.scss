@@ -1,6 +1,6 @@
 .app {
   display: grid;
-  gap:1rem; // 각 영역간의 Gap 추가
+  gap: 1rem; // 각 영역간의 Gap 추가
   grid-template-columns: repeat(3, 1fr); //동일한 비율(3개의 컬럼)
   grid-template-areas:
     "header header header"
@@ -44,7 +44,24 @@
     grid-area: contents;
   }
 
+}
 
+.suggetion {
+  display: grid;
+  grid-template-columns: 32px 2fr 1fr; //3ㄱㅐ의 컬럼을 정의
+  align-items: center;
+  margin-bottom: 0.5rem;
+  .avatar {
+    justify-self: center;
+  }
+
+  .username {
+
+  }
+
+  .follow-btn {
+    justify-self: right;
+  }
 }
 
 

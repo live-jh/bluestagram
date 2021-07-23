@@ -18,7 +18,6 @@ const PostList = () => {
 
     return (
         <div>
-            <h1>PostList</h1>
             {post_list.map((post) => <Post key={post.id} post={post}/>)}
         </div>
     )
