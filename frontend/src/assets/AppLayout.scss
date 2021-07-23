@@ -1,5 +1,6 @@
 .app {
   display: grid;
+  gap:1rem; // 각 영역간의 Gap 추가
   grid-template-columns: repeat(3, 1fr); //동일한 비율(3개의 컬럼)
   grid-template-areas:
     "header header header"

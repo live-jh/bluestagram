@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Axios from "axios";
-import Post from "components/Post";
+import Post from "components/post/Post";
 
 // const api_url = process.env.APP_API_URL;
 const api_url = 'http://localhost:8000';
