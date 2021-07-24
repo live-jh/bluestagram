@@ -10,9 +10,9 @@ const AppHeader = (props) => {
             </div>
             <div className="topnav">
               <Menu mode="horizontal">
-                  <Menu.Item>Menu 1</Menu.Item>
-                  <Menu.Item>Menu 2</Menu.Item>
-                  <Menu.Item>Menu 3</Menu.Item>
+                  <Menu.Item key={1}>Menu 1</Menu.Item>
+                  <Menu.Item key={2}>Menu 2</Menu.Item>
+                  <Menu.Item key={3}>Menu 3</Menu.Item>
               </Menu>
             </div>
         </div>
