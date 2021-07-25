@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from "react-router-dom";
+import {AppProvider} from "store";
 import "antd/dist/antd.css";
 import './index.css';
 import Root from "routes";
 
 ReactDOM.render(
-    <React.StrictMode>
-        <BrowserRouter>
+    <BrowserRouter>
+        <AppProvider>
             <Root/>
-        </BrowserRouter>
-    </React.StrictMode>,
+        </AppProvider>
+    </BrowserRouter>,
     document.getElementById('root')
 );
 

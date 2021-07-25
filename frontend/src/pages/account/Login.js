@@ -1,17 +1,22 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Input, Form, Button, notification, Card} from "antd";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import Axios from "axios";
 import {FrownOutlined, SmileOutlined} from "@ant-design/icons";
-import useLocalStorage from "utils/useLocalStorage";
+// import useLocalStorage from "utils/useLocalStorage";
+import {useAppContext} from "store";
+import {setToken} from "store/action";
 
 const api_url = 'http://localhost:8000';
-export default function Login() {
+export default function Login(props) {
     const history = useHistory();
-    const [jwt_token, setJwtToken] = useLocalStorage("jwt_token", "");
+    const {dispatch} = useAppContext();
+    const location = useLocation(); // location obj
+    // const [jwt_token, setJwtToken] = useLocalStorage("jwt_token", "");
     const [field_errors, setFieldErrors] = useState({});
 
-    console.log(jwt_token);
+    const {from: loginRedirectUrl} = location.state || {from: {pathname: "/"}}; //전에 있던 페이지 이동
+    // console.log(props);
     const onSubmit = async (values) => {
         setFieldErrors({});
         try {
@@ -24,8 +29,9 @@ export default function Login() {
                 description: "환영합니다.",
                 icon: <SmileOutlined style={{color: "#108ee9"}}/>
             })
-            setJwtToken(jwt_token)
-            history.push("/posts")
+            dispatch(setToken(jwt_token))
+            // setJwtToken(jwt_token)
+            history.push(loginRedirectUrl)
         } catch (error) {
             if (error.response) {
                 notification.open({
