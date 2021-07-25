@@ -2,6 +2,7 @@ import React from "react";
 import {Route} from "react-router-dom";
 import Profile from "./Profile";
 import Login from "./Login";
+import ExampleSignUp from "./ExampleSignUp";
 import SignUp from "./SignUp";
 
 const Routes = ({match}) => {
