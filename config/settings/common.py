@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # thrid apps
     'corsheaders',
     'rest_framework',
+    'django_pydenticon',
     # local apps
     'bluestagram',
     'account',
@@ -155,7 +156,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated',  # 인증 필요
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',

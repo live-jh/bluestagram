@@ -6,7 +6,6 @@ import {FrownOutlined, SmileOutlined} from "@ant-design/icons";
 
 
 // antd 는 하나의 Col을 24개로 구분
-const api_url = 'http://localhost:8000';
 export default function SignUp() {
     const history = useHistory();
     const [field_errors, setFieldErrors] = useState({});
@@ -18,7 +17,7 @@ export default function SignUp() {
         setFieldErrors({});
         try {
             await Axios.post(
-                `${api_url}/api/account/signup/`,
+                `${process.env.REACT_APP_API_URL}/api/account/signup/`,
                 values
             )
             notification.open({

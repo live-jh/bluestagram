@@ -4,7 +4,6 @@ import {useHistory} from "react-router-dom";
 import Axios from "axios";
 
 
-const api_url = 'http://localhost:8000';
 export default function ExampleSignUp() {
     const history = useHistory();
 
@@ -30,7 +29,7 @@ export default function ExampleSignUp() {
         setErrors({});
         setLoading(true);
         Axios.post(
-            `${api_url}/api/account/signup`,
+            `${process.env.REACT_APP_API_URL}/api/account/signup`,
             inputs
         ).then((response) => {
             console.log("response: ", response)

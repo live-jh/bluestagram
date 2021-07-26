@@ -1,15 +1,20 @@
 import React from "react";
-import {UserOutlined} from "@ant-design/icons";
-import {Button} from "antd";
+import {Avatar, Button} from "antd";
 
-export default function Suggestion() {
+export default function Suggestion({suggestion_user}) {
+    const {username, author_name, avatar_url} = suggestion_user;
     return (
         <div className="suggetion">
             <div className="avatar">
-                <UserOutlined/>
+                <Avatar
+                    size="small"
+                    icon={
+                    <img src={process.env.REACT_APP_API_URL + avatar_url} alt={author_name}/>
+                }/>
+                {/*<UserOutlined/>*/}
             </div>
             <div className="username">
-                UserName
+                {username}
             </div>
             <div className="follow-btn">
                 <Button size="small">Follow</Button>

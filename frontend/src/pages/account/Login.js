@@ -7,7 +7,6 @@ import {FrownOutlined, SmileOutlined} from "@ant-design/icons";
 import {useAppContext} from "store";
 import {setToken} from "store/action";
 
-const api_url = 'http://localhost:8000';
 export default function Login(props) {
     const history = useHistory();
     const {dispatch} = useAppContext();
@@ -21,7 +20,7 @@ export default function Login(props) {
         setFieldErrors({});
         try {
             const {data: {token: jwt_token}} = await Axios.post(
-                `${api_url}/api/account/token/`,
+                `${process.env.REACT_APP_API_URL}/api/account/token/`,
                 values
             )
             notification.open({
