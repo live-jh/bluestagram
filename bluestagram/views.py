@@ -30,7 +30,7 @@ class PostViewSet(ModelViewSet):
             Q(author=self.request.user) |
             Q(author__in=self.request.user.following_set.all())  # 내가 팔로우 한 목록
         )
-        qs = qs.filter(created_at__gte=timesince)
+        # qs = qs.filter(created_at__gte=timesince) # 3일전
         return qs
 
 

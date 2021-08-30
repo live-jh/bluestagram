@@ -6,12 +6,12 @@
     "header header header"
     "contents contents sidebar"
     "footer footer footer";
-  border: 3px solid #333;
+  //border: 3px solid #333;
   width: 1024px;
   max-width: 100%;
   margin: 20px auto; // 0 상하, auto 좌우
   .app-header {
-    background-color: lightblue;
+    //background-color: lightblue;
     display: flex; // grid, flex
     justify-content: space-between; //좌우 정렬
     align-items: center; // 현 위치에서 가운데
