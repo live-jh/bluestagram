@@ -3,6 +3,7 @@ import {Button, Card} from "antd";
 import Suggestion from "./Suggestion";
 import useAxios from "axios-hooks";
 import {useAppContext} from "../../store";
+import Axios from "axios";
 
 export default function SuggestionList({style}) {
     const [user_list, setUserList] = useState([]);
@@ -45,16 +46,24 @@ export default function SuggestionList({style}) {
     // }, []);
 
     const onFollowUser = (username) => {
-        setUserList(prevUserList => {
-            return prevUserList.map(user => {
-                if (user.username === username) {
-                    return {...user, is_follow: true}
-                } else {
-                    return user;
-                }
+        Axios.post(`${process.env.REACT_APP_API_URL}/api/account/follow/`,
+            {username: username}, // === {username}
+            {headers: headers}
+        ).then(data => {
+            setUserList(prevUserList => {
+                return prevUserList.map(user => {
+                    if (user.username === username) {
+                        return {...user, is_follow: true}
+                    } else {
+                        return user;
+                    }
+                })
             })
+        }).catch(error => {
+
         })
     }
+
     return (
         <div style={style}>
             {loading && <div>...loading</div>}

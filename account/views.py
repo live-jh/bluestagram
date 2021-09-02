@@ -30,6 +30,14 @@ class SuggestionListAPI(ListAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = SuggestionUserSerializer
 
+    def get_queryset(self):
+        # qs = super().get_queryset()  # 부모의 쿼리셋 즉 objects.all() 을 뜻함
+        # qs = qs.exclude(pk=self.request.user.pk)  # 로그인한 유저의 pk 거르기
+        # qs = qs.exclude(pk=self.request.user.following_set.all())  # 로그인한 유저의 pk 거르기
+        qs = (super().get_queryset().exclude(pk=self.request.user.pk).exclude(
+            pk__in=self.request.user.following_set.all()))  # chaning
+        return qs
+
 
 # 함수형으로 간단히 구현
 @api_view(['POST'])  # decorator
