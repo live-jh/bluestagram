@@ -4,11 +4,6 @@ import {useAppContext} from "../store";
 
 export default function LoginRequiredRoute({component: Compontent, ...attributes}) {
     const {store: {is_authenticated}} = useAppContext();
-    if (is_authenticated) {
-
-    } else {
-
-    }
     return (
         //render: route 렌더의 속성값 props
         <Route {...attributes} render={props => {
