@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React from "react"
 import PostNewForm from "../components/post/PostNewForm";
 import {Card} from "antd";
 

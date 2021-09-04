@@ -3,9 +3,9 @@ import {Input, Form, Button, notification, Card} from "antd";
 import {useHistory, useLocation} from "react-router-dom";
 import Axios from "axios";
 import {FrownOutlined, SmileOutlined} from "@ant-design/icons";
-// import useLocalStorage from "utils/useLocalStorage";
 import {useAppContext} from "store";
 import {setToken} from "store/action";
+import {parseErrorMessages} from "utils/ErrorMessage";
 
 export default function Login(props) {
     const history = useHistory();
@@ -40,18 +40,7 @@ export default function Login(props) {
                 })
                 const {data: field_error_message} = error.response;
                 //drf에선 두개 이상의 필드에 대해 걸쳐 에러가 발생하면 non_field_errors 발생
-                setFieldErrors(
-                    //object -> key, value 분리 acc는 함수 -> python items()
-                    Object.entries(field_error_message).reduce((acc, [field_name, errors]) => {
-                        //errors: ['str1', 'str2'].join(" ") => "m1 m2"
-                        // field_name => key, errors => value
-                        acc[field_name] = {
-                            validateStatus: "error",
-                            help: errors.join(" ")
-                        }
-                        return acc;
-                    }, {}) //누적의 초기화 값 빈 obj
-                )
+                setFieldErrors(parseErrorMessages(field_error_message));
             }
         }
     }

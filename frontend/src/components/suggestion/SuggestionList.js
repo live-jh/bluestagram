@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Card} from "antd";
 import Suggestion from "./Suggestion";
 import useAxios from "axios-hooks";
-import {useAppContext} from "../../store";
+import {useAppContext} from "store";
 import Axios from "axios";
 
 export default function SuggestionList({style}) {
@@ -12,7 +12,7 @@ export default function SuggestionList({style}) {
     // third party (axios 대신 사용 -> fetchUserList 기능)
     // refetch 호출했을때 다시 요청 보내기
     const [{data: origin_user_list, loading, error}, refetch] = useAxios({
-        url: `${process.env.REACT_APP_API_URL}/api/account/suggestions`,
+        url: `${process.env.REACT_APP_API_URL}/api/account/suggestions/`,
         headers: headers
     });
 
