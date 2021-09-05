@@ -5,6 +5,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.utils import timezone
+from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -26,8 +27,18 @@ class PostViewSet(ModelViewSet):
         # timesince = timezone.now() - timedelta(days=3)  # 3일전
         # qs = qs.filter(created_at__gte=timesince)
         qs = super().get_queryset()  # 로그인 되어 있음을 보장
-        qs = qs.filter(Q(author=self.request.user) | Q(author__in=self.request.user.following_set.all()))  # 내가 팔로우한 목록
+        qs = qs.filter(
+            Q(author=self.request.user) | Q(author__in=self.request.user.following_set.all())
+        ).order_by(
+            '-created_at'
+        )  # 내가 팔로우한 목록
         return qs
+
+    # 클래스 기반 views에서 get_serializer 재정의 (request 사용)
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
 
     # 저장시 로직
     def perform_create(self, serializer):
@@ -37,6 +48,18 @@ class PostViewSet(ModelViewSet):
         # post.save()
         serializer.save(author=self.request.user)
         return super().perform_create(serializer)
+
+    @action(detail=True, methods=["POST"])
+    def like(self, request, pk):
+        post = self.get_object()
+        post.like_user_set.add(self.request.user)
+        return Response(status.HTTP_201_CREATED)
+
+    @like.mapping.delete
+    def unlike(self, request, pk):
+        post = self.get_object()
+        post.like_user_set.remove(self.request.user)
+        return Response(status.HTTP_204_NO_CONTENT)  # delete는 no-content를 자주 사용
 
 
 # class PostAPI(APIView):

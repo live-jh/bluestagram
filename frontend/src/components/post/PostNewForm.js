@@ -29,7 +29,7 @@ export default function PostNewForm() {
         })
         const headers = {Authorization: `JWT ${jwt_token}`};
         try {
-            await Axios.post(`${process.env.REACT_APP_API_URL}/api/posts`, form_data, {headers: headers});
+            await Axios.post(`${process.env.REACT_APP_API_URL}/api/posts/`, form_data, {headers: headers});
             history.push('/')
         } catch (error) {
             if (error.response) {
