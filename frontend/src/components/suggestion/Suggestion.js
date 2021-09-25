@@ -9,7 +9,7 @@ export default function Suggestion({ suggestion_user, onFollowUser }) {
                 <Avatar
                     size="small"
                     icon={
-                        <img src={process.env.REACT_APP_API_URL + avatar_url} alt={author_name}/>
+                        <img src={avatar_url} alt={author_name}/>
                     }/>
                 {/*<UserOutlined/>*/}
             </div>

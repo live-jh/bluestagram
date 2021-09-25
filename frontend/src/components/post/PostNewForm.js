@@ -3,7 +3,8 @@ import {Button, Form, Input, Upload, Modal, notification} from "antd"
 import "assets/Post.scss"
 import {FrownOutlined, PlusOutlined} from "@ant-design/icons";
 import getBase64FromFile from "utils/Base64";
-import Axios from "axios";
+// import Axios from "axios";
+import {axiosInstance} from "api";
 import {useAppContext} from "store";
 import {parseErrorMessages} from "utils/ErrorMessage";
 import {useHistory} from "react-router-dom";
@@ -29,7 +30,7 @@ export default function PostNewForm() {
         })
         const headers = {Authorization: `JWT ${jwt_token}`};
         try {
-            await Axios.post(`${process.env.REACT_APP_API_URL}/api/posts/`, form_data, {headers: headers});
+            await axiosInstance.post("/api/posts/", form_data, {headers: headers});
             history.push('/')
         } catch (error) {
             if (error.response) {

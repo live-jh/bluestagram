@@ -1,19 +1,18 @@
 import React, {useEffect, useState} from "react";
 // import Axios from "axios";
-import Post from "components/post/Post";
+// import useAxios from "axios-hooks";
+import {axiosInstance, useAxios} from "api";
 import {useAppContext} from "store";
-import useAxios from "axios-hooks";
+import Post from "components/post/Post";
 import {Alert} from "antd";
-import Axios from "axios";
 
 const PostList = () => {
     const {store: {jwt_token}} = useAppContext();
     const headers = {Authorization: `JWT ${jwt_token}`};
     const [post_list, setPostList] = useState();
 
-
     const [{data: origin_post_list, loading, error}, refetch] = useAxios({
-        url: `${process.env.REACT_APP_API_URL}/api/posts/`,
+        url: "/api/posts/",
         headers: headers
     });
 
@@ -24,10 +23,10 @@ const PostList = () => {
 
 
     const handlePostLike = async ({post, is_like}) => {
-        const api_url = `${process.env.REACT_APP_API_URL}/api/posts/${post.id}/like/`;
+        const api_url = `/api/posts/${post.id}/like/`;
         const method = is_like ? "POST" : "DELETE";
         try {
-            const response = await Axios({url: api_url, method, headers});
+            const response = await axiosInstance({url: api_url, method, headers}); //예외 post or delete때문에 method 분리
             console.log(response);
             // refetch(); #refetch로 아래 코드를 대체할 수 있음 재호출
             setPostList(prevState => {

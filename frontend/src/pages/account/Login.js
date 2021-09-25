@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import {Input, Form, Button, notification, Card} from "antd";
 import {useHistory, useLocation} from "react-router-dom";
-import Axios from "axios";
+// import Axios from "axios";
+import {axiosInstance} from "api";
 import {FrownOutlined, SmileOutlined} from "@ant-design/icons";
 import {useAppContext} from "store";
 import {setToken} from "store/action";
@@ -19,8 +20,8 @@ export default function Login(props) {
     const onSubmit = async (values) => {
         setFieldErrors({});
         try {
-            const {data: {token: jwt_token}} = await Axios.post(
-                `${process.env.REACT_APP_API_URL}/api/account/token/`,
+            const {data: {token: jwt_token}} = await axiosInstance.post(
+                "/api/account/token/",
                 values
             )
             notification.open({

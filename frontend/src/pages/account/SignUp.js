@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import {Input, Form, Button, notification} from "antd";
 import {useHistory} from "react-router-dom";
-import Axios from "axios";
+// import Axios from "axios";
 import {FrownOutlined, SmileOutlined} from "@ant-design/icons";
+import {axiosInstance} from "api";
 
 
 // antd 는 하나의 Col을 24개로 구분
@@ -16,8 +17,8 @@ export default function SignUp() {
 
         setFieldErrors({});
         try {
-            await Axios.post(
-                `${process.env.REACT_APP_API_URL}/api/account/signup/`,
+            await axiosInstance.post(
+                "/api/account/signup/",
                 values
             )
             notification.open({

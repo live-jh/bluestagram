@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {Card} from "antd";
 import Suggestion from "./Suggestion";
-import useAxios from "axios-hooks";
+// import Axios from "axios";
+// import useAxios from "axios-hooks";
+import {useAxios, axiosInstance} from "api";
 import {useAppContext} from "store";
-import Axios from "axios";
 
 export default function SuggestionList({style}) {
     const [user_list, setUserList] = useState([]);
@@ -12,7 +13,7 @@ export default function SuggestionList({style}) {
     // third party (axios 대신 사용 -> fetchUserList 기능)
     // refetch 호출했을때 다시 요청 보내기
     const [{data: origin_user_list, loading, error}, refetch] = useAxios({
-        url: `${process.env.REACT_APP_API_URL}/api/account/suggestions/`,
+        url: `/api/account/suggestions/`,
         headers: headers
     });
 
@@ -46,7 +47,7 @@ export default function SuggestionList({style}) {
     // }, []);
 
     const onFollowUser = (username) => {
-        Axios.post(`${process.env.REACT_APP_API_URL}/api/account/follow/`,
+        axiosInstance.post("/api/account/follow/",
             {username: username}, // === {username}
             {headers: headers}
         ).then(data => {
