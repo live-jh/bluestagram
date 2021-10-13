@@ -15,6 +15,7 @@ class DashboardCase(TestCase):
 
     def test_url_status_code(self):
         # response = self.client.get(reverse('total_count_chart'))  # name test
+        
         response = self.client.get('api/')  # url test
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, status.HTTP_200_OK)
