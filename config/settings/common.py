@@ -14,6 +14,7 @@ import json
 import os
 from os.path import join
 from pathlib import Path
+from .secret_setting import (DATABASES, SECRET_KEY)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.core.exceptions import ImproperlyConfigured
@@ -23,19 +24,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-
 # SECURITY WARNING: don't run with debug turned on in production!
-# if SERVER_ENV == 'Local':
-#     DEBUG = True
-# else:
-#     DEBUG = False
-DEBUG = True
-
-ALLOWED_HOSTS = []
+SERVER_ENV = os.environ.get('SERVER_ENV', 'Local')
+if SERVER_ENV == 'Local':
+    DEBUG = True
+else:
+    DEBUG = False
 
 # Application definition
-
 INSTALLED_APPS = [
     # django apps
     'django.contrib.admin',
@@ -44,13 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # thrid apps
+    # thrid apps (add cacheops, django_crontab)
     'corsheaders',
     'rest_framework',
     'django_pydenticon',
-    # local apps
-    'bluestagram',
-    'account',
+
 ]
 
 MIDDLEWARE = [
@@ -66,24 +60,25 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
-env_json = join(BASE_DIR, 'config/common/env.json')
-
-with open(env_json) as f:
-    secrets = json.loads(f.read())['development']
-
-
-def get_secret(key, secrets=secrets):
-    """비밀 변수를 가져오거나 명시적 예외를 반환한다."""
-    try:
-        return secrets[key]
-    except KeyError:
-        error_msg = "Set the {} environment variable".format(key)
-        raise ImproperlyConfigured(error_msg)
-
-
-SECRET_KEY = get_secret("SECRET_KEY")
-
-DATABASES = secrets['DATABASES']
+# env_json = join(BASE_DIR, 'config/common/env.json')
+#
+# with open(env_json) as f:
+#     secrets = json.loads(f.read())['development']
+#
+#
+# # SECURITY WARNING: keep the secret key used in production secret!
+# def get_secret(key, secrets=secrets):
+#     """비밀 변수를 가져오거나 명시적 예외를 반환한다."""
+#     try:
+#         return secrets[key]
+#     except KeyError:
+#         error_msg = "Set the {} environment variable".format(key)
+#         raise ImproperlyConfigured(error_msg)
+#
+#
+# SECRET_KEY = DATABASES
+#
+# DATABASES = secrets['DATABASES']
 
 TEMPLATES = [
     {
@@ -162,7 +157,7 @@ REST_FRAMEWORK = {
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    ),
+    )
 }
 
 JWT_AUTH = {

@@ -5,3 +5,4 @@ __pycache__
 db.sqlite3
 config/common/env.json
 venv/*
+secret_setting.py
