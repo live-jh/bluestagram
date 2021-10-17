@@ -10,11 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from datetime import timedelta
-import json
 import os
+import json
 from os.path import join
 from pathlib import Path
-from .secret_setting import (DATABASES, SECRET_KEY)
+# from .secret_setting import (DATABASES, SECRET_KEY)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.core.exceptions import ImproperlyConfigured
@@ -83,8 +83,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -161,7 +160,6 @@ REST_FRAMEWORK = {
 }
 
 JWT_AUTH = {
-    'JWT_SECRET_KEY': SECRET_KEY,  # JWT Key를 암호화할때 사용
     'JWT_ALLOW_REFRESH': True,  # 리프레시 허용
     'JWT_ALGORITHM': 'HS256',
     'JWT_EXPIRATION_DELTA': timedelta(days=7),

@@ -35,3 +35,6 @@ INTERNAL_IPS = ['127.0.0.1']
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
+
+# jwt key를 암호화할때 사용
+JWT_AUTH['JWT_SECRET_KEY'] = SECRET_KEY

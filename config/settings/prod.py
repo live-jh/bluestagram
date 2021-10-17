@@ -29,3 +29,6 @@ INSTALLED_APPS += [
 
 ALLOWED_HOSTS = ['*']
 
+# jwt key를 암호화할때 사용
+JWT_AUTH['JWT_SECRET_KEY'] = SECRET_KEY
+
